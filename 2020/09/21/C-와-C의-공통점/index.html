@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Kang Sang Woo">
+
+
+
+
+
+<title>C++ 와 C 의 공통점 | In-Genieur</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">In-Genieur</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">In-Genieur</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">C++ 와 C 의 공통점</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Kang Sang Woo</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">September 21, 2020&nbsp;&nbsp;12:30:54</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/C/">C++</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="변수"><a href="#변수" class="headerlink" title="변수"></a>변수</h2><h3 id="변수의-정의"><a href="#변수의-정의" class="headerlink" title="변수의 정의"></a>변수의 정의</h3><p>사실 C 언어에서 작성된 코드를 그대로 C++ 에 붙여 넣기 해도 큰 문제가 없다고 말해도 과언이 아닐 정도로 C++ 은 C 언어의 문법을 거의 완전하게 포함하고 있습니다.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 변수의 정의</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">    <span class="keyword">double</span> d;</span><br><span class="line">    <span class="keyword">float</span> f;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>가장 기초적인 변수를 정의하는 부분입니다. 위 코드를 볼 때 C 언어에서 작성한 코드라고 말해도 이상하지 않습니다. 변수를 정의하는 부분에서 만큼은 C 언어와 달라진 점이 없습니다. </p>
+<p>변수 명 이름 작성 규칙도 바뀐 것이 없습니다. 변수명도 C 언어 때와 마찬가지로 알파벳과 _ 기호, 숫자들을 사용할 수 있으며 그 외 것들은 사용할 수 없습니다.<br>또한 변수 이름의 맨 앞 부분에는 숫자가 올 수 없습니다.</p>
+<p>Google의 C++ 변수의 이름을 짓는 규칙인 C++ Coding Standard는 <a target="_blank" rel="noopener" href="https://google.github.io/styleguide/cppguide.html#Variable_Names">이곳</a>에서 확인하실 수 있습니다.</p>
+<p>변수를 짓는데 모든 공통된 사항으로는 변수의 이름만 보았을 때 직관적으로 무슨 역할을 하는 것인지 알 수 있어야 합니다.</p>
+<h3 id="올바른-변수-이름-짓기"><a href="#올바른-변수-이름-짓기" class="headerlink" title="올바른 변수 이름 짓기"></a>올바른 변수 이름 짓기</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> number_of_people; <span class="comment">// GOOD</span></span><br><span class="line"><span class="keyword">double</span> interest rate; <span class="comment">// GOOD</span></span><br></pre></td></tr></table></figure>
+<p>위의 변수 두개는 사람의 인원수, 이자율을 가르키는구나 라고 직관적으로 알 수 있습니다.</p>
+<h3 id="잘못된-변수-이름-짓기"><a href="#잘못된-변수-이름-짓기" class="headerlink" title="잘못된 변수 이름 짓기"></a>잘못된 변수 이름 짓기</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num_of_ppl; <span class="comment">// BAD</span></span><br><span class="line"><span class="keyword">double</span> intrst_rt; <span class="comment">// BAD</span></span><br></pre></td></tr></table></figure>
+<p>어떠한 역할을 하는지 구분하기 어렵습니다.</p>
+<p>다음은 변수의 띄어쓰기에 관한 규칙입니다.</p>
+<h3 id="변수의-올바른-띄어쓰기"><a href="#변수의-올바른-띄어쓰기" class="headerlink" title="변수의 올바른 띄어쓰기"></a>변수의 올바른 띄어쓰기</h3><p>보통 변수 이름을 지을 때</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> number_of_people; <span class="comment">// GOOD</span></span><br><span class="line"><span class="keyword">int</span> NumberOfPeople; <span class="comment">// GOOD</span></span><br></pre></td></tr></table></figure>
+<p>위 처럼 두 가지의 방법을 사용하는데 하나는 이름의 띄어쓰기 부분에 _ 를 넣는 것이고 다른 하나는 띄어쓰기 부분에 대문자로 구분하는 것 입니다. 사용에 있어서는 사람 마다 개인차가 있겠지만, 가장 중요한 것은 위 두 가지 방식을 혼용하여 사용하지 않는 것 입니다. 예시로,</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> NumberOf_People; <span class="comment">// BAD</span></span><br></pre></td></tr></table></figure>
+<p>는 권장하지 않는 방법입니다. 이렇게 변수의 정의는 C 와 C++ 이 차이가 없습니다.</p>
+<h2 id="배열과-포인터"><a href="#배열과-포인터" class="headerlink" title="배열과 포인터"></a>배열과 포인터</h2><p>변수와 마찬가지로 배열과 포인터를 정의하는 방법도 C 언어와 동일합니다. 포인터의 경우 C 언어에서의 * 연산자와 &amp; 연산자의 역할을 동일하게 물려받았습니다.</p>
+<h3 id="코드"><a href="#코드" class="headerlink" title="코드"></a>코드</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">int</span> *p_arr = arr;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"><span class="keyword">int</span> *p_i = &amp;i;</span><br></pre></td></tr></table></figure>
+<p>는 C 언어에서 사용하던 소스 코드이지만, C++ 에서도 동일하게 사용이 가능합니다.</p>
+<h2 id="반복문"><a href="#반복문" class="headerlink" title="반복문"></a>반복문</h2><p>다른 문법 구조들도 마찬가지 입니다. 반복문도 C 언어에서 사용하던 방법과 동일하게 사용이 가능합니다.</p>
+<h3 id="코드-1"><a href="#코드-1" class="headerlink" title="코드"></a>코드</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">         <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>코드를 성공적으로 컴파일하여 실행해보면</p>
+<h3 id="실행-결과"><a href="#실행-결과" class="headerlink" title="실행 결과"></a>실행 결과</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">0</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td></tr></table></figure>
+
+<p>코드도 값도 모두 동일합니다. C 언어와 마찬가지로 for 문은 달라진 것이 없습니다. </p>
+<h2 id="1-부터-10-까지의-합"><a href="#1-부터-10-까지의-합" class="headerlink" title="1 부터 10 까지의 합"></a>1 부터 10 까지의 합</h2><p>C++ 에서 for문을 이용하여 1 부터 10 까지 더하는 코드를 만들어 보겠습니다.</p>
+<h3 id="코드-2"><a href="#코드-2" class="headerlink" title="코드"></a>코드</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 1 부터 10 까지의 합 */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, sum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++) &#123;</span><br><span class="line">        sum += i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;합은 : &quot;</span> &lt;&lt; sum &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>성공적으로 컴파일 후 실행하게 되면</p>
+<h3 id="실행-결과-1"><a href="#실행-결과-1" class="headerlink" title="실행 결과"></a>실행 결과</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">합은 : 55</span><br></pre></td></tr></table></figure>
+
+<p>역시 기존의 C 언어와 동일합니다.</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Kang Sang Woo</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://in-genieur.github.io/2020/09/21/C-%EC%99%80-C%EC%9D%98-%EA%B3%B5%ED%86%B5%EC%A0%90/">http://in-genieur.github.io/2020/09/21/C-%EC%99%80-C%EC%9D%98-%EA%B3%B5%ED%86%B5%EC%A0%90/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2020 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>learn everything to <strong>GROW UP</strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/CPP/"># cpp</a>
+                    
+                        <a href="/tags/C/"># C++</a>
+                    
+                        <a href="/tags/VARIABLE/"># variable</a>
+                    
+                        <a href="/tags/PRIMITIVE-TYPE/"># primitive type</a>
+                    
+                        <a href="/tags/FOR/"># for</a>
+                    
+                        <a href="/tags/POINTER/"># pointer</a>
+                    
+                        <a href="/tags/ARRAY/"># array</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2020/09/21/%EC%B2%AB%EB%B2%88%EC%A7%B8-C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8-%EB%B6%84%EC%84%9D/">첫번째 C++ 프로그램 분석</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Kang Sang Woo | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
