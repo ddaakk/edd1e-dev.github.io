@@ -256,6 +256,25 @@
 <p>하지만 참조자의 참조자 라는 말의 의미를 생각해 볼 필요가 있습니다. 별명의 별명을 만들 필요가 없기 때문입니다. 실제로 C++ 의 문법 상 참조자의 참조자를 만드는 것은 금지되어 있습니다.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>&amp; z = y;</span><br></pre></td></tr></table></figure>
 <p>즉, 위 문장은 결국 x 의 참조자를 선언해라와 같은 의미가 되서, z 역시 x 의 참조자가 됩니다. 따라서 y 와 z 모두 x 의 참조자가 됩니다.</p>
+<p>결과적으로 위 문장들은 모두 1,1,1 과 2,2,2 와 3,3,3 을 출력합니다.<br>처음 참조자를 접하게 되면 굳이 포인터로 할 수 있는 것을 왜 참조자를 사용해야 하는지에 의문이 들 수 있습니다. 하지만 참조자를 사용하게 되면 불필요한 &amp; 와 * 가 필요 없기 때문에 코드를 훨씬 간결하게 나타낼 수 있습니다.</p>
+<p>대표적으로 C++ 의 cin 함수를 예시로 들 수 있습니다. 사용자로 변수에 값을 입력 받을 때 다음과 같이 수행 했습니다.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; user_input;</span><br></pre></td></tr></table></figure>
+
+<p>하지만 C 언어 에서 scanf 함수를 이용할 때는 분명히</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;user_input);</span><br></pre></td></tr></table></figure>
+<p>와 같이 항상 주소값을 전달해 주었습니다. 이유는 어떤 변수의 값을 다른 함수에서 바꾸기 위해서는 항상 포인터로 주소값을 전달해야 하기 때문입니다. 하지만 C++ 에서는 cin 함수에 단지 user_input 을 전달했는데 정상적으로 작동합니다.</p>
+<p>바로 cin 이 레퍼런스 매개변수로서 user_input 을 받아와서 그렇습니다. 따라서 &amp; 연산자를 user_input 앞에 사용할 필요가 없어진 것 입니다.</p>
+<h2 id="상수에-대한-참조자"><a href="#상수에-대한-참조자" class="headerlink" title="상수에 대한 참조자"></a>상수에 대한 참조자</h2><h3 id="코드-1"><a href="#코드-1" class="headerlink" title="코드"></a>코드</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>&amp; ref = <span class="number">4</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; ref &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>와 같은 코드를 살펴보겠습니다. 컴파일 시 아래와 같은 오류가 발생합니다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error C2440: <span class="string">&#x27;initializing&#x27;</span> : cannot convert from <span class="string">&#x27;int&#x27;</span> to <span class="string">&#x27;int &amp;&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>위 상수 값 자체는 리터럴(const int b = 8 에서 b 는 상수이고, 8 은 리터럴입니다) 이기 때문에 만일 위와 같이 레퍼런스로 참조하게 된다면</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ref = <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+<p>와 같이 리터럴의 값을 바꾸는 행위가 가능하게 됩니다. 따라서 C++ 문법 상 상수 리터을 일반적인 레퍼런스가 참조하는 것은 불가능하게 되어 있습니다.</p>
+<p>하지만</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;ref = <span class="number">4</span>;</span><br></pre></td></tr></table></figure>
+<p>와 같이 상수 참조자로 선언한다면 리터럴도 참조할 수 있습니다. 따라서</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = ref;</span><br></pre></td></tr></table></figure>
+<p>는 a = 4 의 문장과 동일하게 처리됩니다.</p>
 
         </div>
 
@@ -300,9 +319,9 @@
                     
                         <a href="/tags/pointer/"># pointer</a>
                     
-                        <a href="/tags/array/"># array</a>
-                    
                         <a href="/tags/reference/"># reference</a>
+                    
+                        <a href="/tags/array/"># array</a>
                     
                         
                 </span>
