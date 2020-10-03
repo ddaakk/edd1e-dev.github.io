@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Kang Sang Woo">
+
+
+
+
+
+<title>Android BackGround and Foreground Service | In-Genieur</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">In-Genieur</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">In-Genieur</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Android BackGround and Foreground Service</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Kang Sang Woo</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">October 3, 2020&nbsp;&nbsp;15:29:48</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="백그라운드와-포그라운드-차이점"><a href="#백그라운드와-포그라운드-차이점" class="headerlink" title="백그라운드와 포그라운드 차이점"></a>백그라운드와 포그라운드 차이점</h2><p>백그라운드 서비스와 포그라운드 서비스의 가장 큰 차이점은 사용자가 서비스의 존재에 대해 인지할 수 있는지 없는 지에 대한 차이라고 볼 수 있다. </p>
+<h2 id="백그라운드-서비스"><a href="#백그라운드-서비스" class="headerlink" title="백그라운드 서비스"></a>백그라운드 서비스</h2><p>예를 들어, 사용자가 커뮤니티앱에서 용량이 매우 큰 게시물을 작성하는 상황을 생각해보자. 사용자는 게시물을 작성하고, 작성완료 버튼을 누를것이다. 작성완료 버튼을 누르면, 사용자가 다른 액티비티로 이동중에도 게시물의 데이터의 업로드가 강제로 종료되지 않도록, 백그라운드 서비스가 시작되어 사용자가 작성한 게시물 정보를 서버에 업로드하는 서비스가 동작되도록 할 수 있다. 그러나 사용자는 이러한 사실에 대해 인지하지 못하고 커뮤니티 앱을 자유롭게 이용할 것이다. 백그라운드 서비스는 두가지 방식으로 시작할 수 있다. startService() 메서드를 호출하거나, bindService() 를 호출하는 것이다. 백그라운드, 포그라운드 상관없이 모든 서비스 클래스는 동시에 여러개의 요청을 처리해야하는 경우 Service 클래스를 상속받고, Intent로 받은 여러개의 요청을 작업큐에 담아놓고 하나하나 처리하고 싶은 경우 IntentService 클래스를 상속받는다.</p>
+<h2 id="포그라운드-서비스"><a href="#포그라운드-서비스" class="headerlink" title="포그라운드 서비스"></a>포그라운드 서비스</h2><p>사용자가 구글 플레이 앱스토어에서 앱을 다운받는 상황을 생각해보자. 사용자는 다운로드 버튼을 누르고, 앱이 전부 다운로드되기 전에 앱스토어 앱을 종료하고 다른 활동을 시작할 수 있다. 이때, 포그라운드 서비스가 시작되어 앱의 다운로드를 계속 진행하고, 사용자의 기기에 앱이 어느정도 다운로드되었는지를 알려주는 상태바알림이 제공된다. 포그라운드 서비스가 계속 진행중인 상태에는 계속해서 상태바알림이 제공되고, 사용자는 앱이 얼마만큼 다운로드 되었는지 인지할 수 있다.</p>
+<p>포그라운드 서비스 ( Foregroudn Service) 는 현재 뭔가 하고 있다는 것을 사용자가 인지하고 있는 서비스이다. 그래서 메모리 부족시 시스템에 의한 종료대상에서 제외된다. 전면에 있는 서비스는 “진행중(Ongoing)”인 상태바 알림(notification)을 제공해야한다. 즉, foreground 서비스가 실행되는 중에는 무조건 상태바 알림(notification)이 제공되어야한다. 서비스가 정지되거나 전면에서 제외되지 않으면 상태바 알림 목록에서 제거되지 않는다는 뜻이다.</p>
+<p>예를들어 서비스에서 음악을 재생중인 음악재생 앱은, 사용자가 음악 재생중이라는 것을 알고 있기 때문에 그 서비스를 전면에 두기 위해 상태바 알림을 제공한다. 그 상태바 알림은 아마 현재 재생중인 곡을 표시해 줄것이며, 눌렀을 때 음악재생 앱의 액티비티를 실행해 줄것이다.</p>
+<p>즉, 서비스를 전면에 두기 위해서는 startForeground() 를 호출한다. 이 메서드에는 두 개의 인자를 넘겨야 한다. 하나는 알림을 식별하기 위한 유니크한 정수형 ID이며, 다른 하나는 Notification 객체이다. 서비스를 전면에서 제외시키기 위해서는 stopForeground() 를 호출한다. stopForeground() 메서드는 boolean 형의 인자를 받는다. 이것은 상태바에 있는 알림을 제거할것인지 여부를 가리킨다. 이 메서드는 서비스를 정지시키지는 않는다. </p>
+<h2 id="안드로이드-백그라운드-실행-정책"><a href="#안드로이드-백그라운드-실행-정책" class="headerlink" title="안드로이드 백그라운드 실행 정책"></a>안드로이드 백그라운드 실행 정책</h2><p>드로이드 백그라운드 실행 정책<br>애플리케이션은 언제 백그라운드 상태로 있을까?<br>백그라운드 실행을 이해하기 전에 애플리케이션이 포어그라운드인지 백그라운드인지 명확하게 파악해야합니다. 다음 중 하나라도 해당되면 애플리케이션이 포어그라운드에있는 것으로 간주됩니다.</p>
+<p>어떤 애플리케이션이 액티비티가 시작(started),중지(pause)와 상관없이 가시적일 때<br>어떤 애플리케이션이 포어그라운드 서비스를 가질 때<br>포어그라운드 애플리케이션이 서비스를 갖는 애플리케이션에 바인딩하거나 콘텐츠프로바이더를 사용하여 앱에 연결결할 때.<br>예를 들어 다른 앱이나 시스템이 아래의 내용에 바인딩 하면 애플리케이션이 포어그라운드에 있는 것입니다.<br>IME<br>Wallpaper service<br>Notification listener<br>Voice 또는 text 서비스<br>자동차에서 스트리밍을 드는 음악 앱(Android Auto 일때)<br>만약 위 조건들을 만족하지 못한다면 애플리케이션이 백그라운드에 있는것으로 간주됩니다.</p>
+<p>백그라운드 실행 변화<br>백그라운드에서 실행중인 작업들은 디바이스의 RAM이나 베터리같은 자원들을 소모하고, 사용자들에게 좋지 못한 경험을 제공합니다. 예를 들어 백그라운드 작업으로 인해 장치의 배터리 수명이 저하되거나 비디오 시청, 게임, 카메라 사용과 같은 사용자의 장치 성능 저하가 발생할 수 있습니다.</p>
+<p>베터리 수명을 개선하고 좋은 사용자 경험을 제공하기 위해서 안드로이드는 몇가지 백그라운드 정책들을 진화 시켜왔습니다.</p>
+<p>도즈모드와 앱 대기상태(Doze And App Standby) : 화면이 꺼지고, 충전중이 아니며 대기상태일때 애플리케이션의 행동을 제한 합니다.<br>백그라운드 상태에서 위치 서비스 제약 : 백그라운드 상태에 있는 앱이 사용자의 현재위치를 검색할 수 있는 빈도를 제한 합니다.<br>백그라운드 서비스 제약 : 보이지 않는 CPU/Network 사용과 실행중인 백그라운드 서비스들을 제한합니다.<br>가장 최근에는 사용자가 사용하지 않는 앱에서 사용할 수 있는 기기 리소스를 제한 할 수 있는 앱 대기 버킷(App Standby Buckets)과 앱이 좋지 않는 행동을 보이는 경우 백그라운드에서 시스템 리소스에 대한 액의 액세스를 제한하도록 사용자에게 경고하는 앱 제한(App Restrictions) 과 배터리 절약 개선(Battery Saver improvements) 정책이 추가 되었습니다.<br>사례와 해결방법<br>백그라운드 실행을 구현하는 데 사용할 도구를 결정하려면 개발자가 원하는 것을 명확하게 이해하고 어떤 제한 사항을 가지고 있어야합니다. 이 순서도는 결정을 내리는 데 도움이됩니다.</p>
+<p>WorkManager<br>WorkManager는 모든 OS 백그라운드 실행 제한을 고려하여 백그라운드 실행에 권장되는 솔루션입니다. 작업이 연기 되어도 작업이 실행되도록 보장해야하는 경우 WorkManager를 사용할 수 있습니다. 이 API를 사용하면 작업(일회성 또는 반복일때)을 예약하거나 작업을 결합(체이닝) 할 수 있습니다. 또한 장치가 유휴상태이거나 충전중일 때 특정이벤트를 트리거하거나 콘텐츠 프로바이더가 변경 될 때 실행하는 것과 같은 실행 제한 조건을 적용할 수 있습니다.</p>
+<p>한가지 예로 로그를 압축하여 서버에 업로드해야하는 경우라면 두가지 작업 요청을 만들어 수행할 수 있습니다.</p>
+<p>파일을 압축합니다. 이 단계에서 장치가 충전중이여야 한다는 제한 조건을 추가 할 수 있습니다.<br>서버에 업로드 합니다. 이 요청의 경우 네트워크가 사용가능할 때만 작업이 실행되도록 네트워크 연결 제한 조건을 추가해야합니다.<br>두 작업을 모두 큐에 넣은 뒤 WorkManager와 함께 필요한 리소스가 충족할 때 작업을 수행되도록 할 수 있습니다.</p>
+<p>WorkManager의 또 다른 장점은 전원 관리 기능을 존중한다는 것입니다. WorkManager는 제약 조건이 충족되며, Doze가 해제 된다면 주어진 작업을 실행할 것입니다.</p>
+<p>FCM<br>새로운 온라인 콘텐츠 동기화와 같은 외부 이벤트에 대한 응답으로 장기적인 실행 작업을 예약하려면 Firebase Cloud Messaging을 사용하여 앱에 알린 다음 WorkManager로 작업 요청을 만들어 콘텐츠를 동기화하면 됩니다.</p>
+<p>Foreground Service<br>앱에서 음악 / 비디오 재생 또는 탐색과 같이 앱을 종료하거나 화면을 꺼도 지연되지 않고 사용자가 시작한 작업을 완료해야하는 경우 포어그라운드 서비스를 사용해야합니다. </p>
+<p>AlarmManager<br>정확한 시간에 작업을 실행해야하고 사용자와 상호 작용이 포함되며 지연 될 수없는 경우 AlarmManager를 사용하면됩니다. 예를 들면,</p>
+<p>약먹는 시간을 상기 시킬 때<br>좋아하는 TV프로그램이 시작하려 하는것을 알려줄 때<br>알람이 발생하면 작업을 짧은 시간(수초)내에 끝내야 하며, 네트워크에 액세스 하지 못할 수도 있습니다.(도즈모드나 앱대기 버킷 때문에) 네트워크가 필요하거나 긴 작업을 수행하려면 WorkManager를 사용해야합니다. 알람이 울릴 때마다 장치는 저전력 모드를 벗어나 부분적 wake-lock을 유지하므로 시간이 지남에 따라 배터리 수명에 상당한 영향을 줄 수 있습니다. Google Play Console을 통해 제공되는 Android Vitals에서 강조 표시된 과도한 꺠우기 통계를 통해 모니터링 할 수 있습니다.</p>
+<p>요약하자면 이렇습니다.</p>
+<p>WorkManager<br>지연 가능한 작업의 실행을 보장받고 싶을 때<br>– 로그를 서버에 업로드<br>– 부호화/복호화 된 콘텐츠를 업로드/다운로드</p>
+<p>FCM+WorkManager<br>외부의 이벤트에 대한 응답으로 어떠한 작업을 시작하고 싶을 때 – 이메일처럼 새로운 콘텐츠를 동기화</p>
+<p>Foreground Service<br>사용자가 앱을 종료하더라도 사용중이던 앱을 즉시 수행할 때<br>– 음악 앱<br>– 추적 활동<br>– 네비게이션 앱</p>
+<p>AlarmManager<br>정확한 시간에 알림과 같은 사용자 상호 작용과 관련된 작업을 트리거 할 때<br>– 알람 시계<br>– 약먹을 시간 알려줄 때<br>–  TV시청 시간 알림</p>
+<p>백그라운드 실행을 신중하게 사용하면 배터리를 절약하면서 사용자를 즐겁게하는 멋진 앱을 만들 수 있습니다. Android에서 백그라운드 작업을 실행하는 데 대한 자세한 정보가 필요하면 Android 개발자 사이트에 멋진 콘텐츠가 있습니다.</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Kang Sang Woo</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://in-genieur.github.io/2020/10/03/Android-BackGround-and-Foreground-Service/">http://in-genieur.github.io/2020/10/03/Android-BackGround-and-Foreground-Service/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2020 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>learn everything to <strong>GROW UP</strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Android/"># Android</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2020/10/03/HTML-Style-Guide-and-Coding-Conventions/">HTML Style Guide and Coding Conventions</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Kang Sang Woo | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
