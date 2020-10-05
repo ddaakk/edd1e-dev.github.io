@@ -191,21 +191,23 @@
         </header>
 
         <div class="post-content">
-            <h2 id="Material-Components로-변경하기"><a href="#Material-Components로-변경하기" class="headerlink" title="Material Components로 변경하기"></a>Material Components로 변경하기</h2><p>MDC(Material Design Components)    는 기존의 안드로이드의 Design Support Library 를 대체합니다.</p>
+            <h2 id="Material로-이전하기"><a href="#Material로-이전하기" class="headerlink" title="Material로 이전하기"></a>Material로 이전하기</h2><h3 id="Material-Components로-변경하기"><a href="#Material-Components로-변경하기" class="headerlink" title="Material Components로 변경하기"></a>Material Components로 변경하기</h3><p>MDC(Material Design Components)    는 기존의 안드로이드의 Design Support Library 를 대체합니다.</p>
 <p>기존에 사용하던 AppCompat 템플릿입니다.</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Copyright 2020 Google LLC.</span></span><br><span class="line"><span class="comment">   SPDX-License-Identifier: Apache-2.0 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">&quot;Theme.App&quot;</span> <span class="attr">parent</span>=<span class="string">&quot;Theme.AppCompat.*&quot;</span>&gt;</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">&quot;colorPrimary&quot;</span>&gt;</span>@color/navy_700<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">&quot;colorPrimaryDark&quot;</span>&gt;</span>@color/navy_900<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">&quot;colorAccent&quot;</span>&gt;</span>@color/green_300<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="서포트-라이브러리에서-제트팩으로-이전하기"><a href="#서포트-라이브러리에서-제트팩으로-이전하기" class="headerlink" title="서포트 라이브러리에서 제트팩으로 이전하기"></a>서포트 라이브러리에서 제트팩으로 이전하기</h2><p>MDC 를 사용할 수 있으려면 기존 Support Library 를 Android Jetpack 으로 변경해야만 합니다. Jetpack 은 새로운 androidx 이름 공간을 사용합니다. MDC는 AndroidX 라이브러리로 빌드 되었고 기존에 지원하던 Support Library 와 독립된 버전이기 때문에 이전 Support Library 를 필수로 MDC 로 변경해야 합니다.</p>
+<h3 id="서포트-라이브러리에서-제트팩으로-이전하기"><a href="#서포트-라이브러리에서-제트팩으로-이전하기" class="headerlink" title="서포트 라이브러리에서 제트팩으로 이전하기"></a>서포트 라이브러리에서 제트팩으로 이전하기</h3><p>MDC 를 사용할 수 있으려면 기존 Support Library 를 Android Jetpack 으로 변경해야만 합니다. Jetpack 은 새로운 androidx 이름 공간을 사용합니다. MDC는 AndroidX 라이브러리로 빌드 되었고 기존에 지원하던 Support Library 와 독립된 버전이기 때문에 이전 Support Library 를 필수로 MDC 로 변경해야 합니다.</p>
 <p>AndroidX 로 이전하기 위해서, 안드로이드 개발자 공식 사이트에서는 <a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/migrate">official developer documentation</a> 나 Android Dev Summit ’19 에서 포스팅한  <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Hyt7LR5mXLc">“Migrating to AndroidX: The time is right” talk</a> 를 보길 추천합니다. 안드로이드 스튜디오는 Design Support 라이브러리의 의존성을 MDC로 리팩토링해줄 겁니다.</p>
 <p>메모: 제트팩과 1.0.0 버전의 MDC 아티펙트는 Support Library 28.0.0 아티펙트와 2개가 서로 호환성이 있습니다. 28 버전이 아니라면 먼저 업그레이드 후에 이주할 것을 추천합니다.</p>
-<h2 id="MCD-1-0-0-으로-업데이트-하기"><a href="#MCD-1-0-0-으로-업데이트-하기" class="headerlink" title="MCD 1.0.0 으로 업데이트 하기"></a>MCD 1.0.0 으로 업데이트 하기</h2><p>만약 안드로이드 스튜디오를 사용하고 있다면 제트펙으로 이전을 위해 ‘Refactor &gt; Migrate to AndroidX’ 툴을 사용하세요. 이 과정을 진행하면 Design Support 라이브러리가 MDC 로 배치되므로 바로 밑에 나올 과정을 생략해도 됩니다.</p>
+<h3 id="MCD-1-0-0-으로-업데이트-하기"><a href="#MCD-1-0-0-으로-업데이트-하기" class="headerlink" title="MCD 1.0.0 으로 업데이트 하기"></a>MCD 1.0.0 으로 업데이트 하기</h3><p>만약 안드로이드 스튜디오를 사용하고 있다면 제트펙으로 이전을 위해 ‘Refactor &gt; Migrate to AndroidX’ 툴을 사용하세요. 이 과정을 진행하면 Design Support 라이브러리가 MDC 로 배치되므로 바로 밑에 나올 과정을 생략해도 됩니다.</p>
 <p>만약 리팩토링 과정을 하지 않았다면, 직접 아래의 과정을 수행해서 의존성을 추가해야 합니다.</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/* Copyright 2020 Google LLC.</span><br><span class="line">   SPDX-License-Identifier: Apache-2.0 */</span><br><span class="line">-implementation ‘com.android.support:design:28.0.0’</span><br><span class="line">+implementation ‘com.google.android.material:material:1.0.0’</span><br></pre></td></tr></table></figure>
 
 <p>또한 패키지의 Design Support Library 클래스가 참조되는 namespace 들을  android.support.design to com.google.android.material 로 변경해줘야 합니다. (XML 레이아웃과 코드 모두 포함). 옮기기 위해 <a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/migrate/class-mappings#androidsupportdesign">클래스 매핑 테이블</a>을 확인해주세요.</p>
-<h2 id="테마-변경하기"><a href="#테마-변경하기" class="headerlink" title="테마 변경하기"></a>테마 변경하기</h2><p>앱 테마를 Material 컴포넌트 테마로부터 물려받아야 합니다. 프로젝트에 적용된 <a target="_blank" rel="noopener" href="https://medium.com/androiddevelopers/android-styling-themes-overlay-1ffd57745207">theme overlays</a> 와 추가된 테마들에도 동일한 적용이 필요합니다.</p>
+<h3 id="테마-변경하기"><a href="#테마-변경하기" class="headerlink" title="테마 변경하기"></a>테마 변경하기</h3><p>앱 테마를 Material 컴포넌트 테마로부터 물려받아야 합니다. 프로젝트에 적용된 <a target="_blank" rel="noopener" href="https://medium.com/androiddevelopers/android-styling-themes-overlay-1ffd57745207">theme overlays</a> 와 추가된 테마들에도 동일한 적용이 필요합니다.</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Copyright 2020 Google LLC.</span></span><br><span class="line"><span class="comment">   SPDX-License-Identifier: Apache-2.0 --&gt;</span></span><br><span class="line">-<span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">&quot;Theme.App&quot;</span> <span class="attr">parent</span>=<span class="string">&quot;Theme.AppCompat.*&quot;</span>&gt;</span></span><br><span class="line"><span class="xml">+<span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">&quot;Theme.App&quot;</span> <span class="attr">parent</span>=<span class="string">&quot;Theme.MaterialComponents.*&quot;</span>&gt;</span></span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
+<p>기존에 AppCompat 테마를 사용하고 있었다면 MDC-안드로이드 테마를 사용하기 위해 하나씩 변경해줘야 합니다. 대부분 간단하게 MaterialComponents를 부모로 가진 AppCompat의 일부로 바꿀 수 있습니다.</p>
+<p>아래의 표를 통해 전체 테마와 테마 오버레이 매핑을 확인하세요.</p>
 <table>
 <thead>
 <tr>
@@ -266,6 +268,51 @@
 <td align="center">Theme.MaterialComponents.DayNight.Dialog.*</td>
 </tr>
 </tbody></table>
+<table>
+<thead>
+<tr>
+<th>AppCompat theme overlay</th>
+<th>MDC-Android theme overlay</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ThemeOverlay.AppCompat</td>
+<td>ThemeOverlay.MaterialComponents</td>
+</tr>
+<tr>
+<td>ThemeOverlay.AppCompat.Light</td>
+<td>ThemeOverlay.MaterialComponents.Light</td>
+</tr>
+<tr>
+<td>ThemeOverlay.AppCompat.Dark</td>
+<td>ThemeOverlay.MaterialComponents.Dark</td>
+</tr>
+<tr>
+<td>ThemeOverlay.AppCompat.*.ActionBar</td>
+<td>ThemeOverlay.MaterialComponents.<em>.ActionBar.</em></td>
+</tr>
+<tr>
+<td>ThemeOverlay.AppCompat.Dialog.*</td>
+<td>ThemeOverlay.MaterialComponents.Dialog.*</td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>ThemeOverlay.MaterialComponents.*.BottomSheetDialog</td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>ThemeOverlay.MaterialComponents.MaterialAlertDialog.*</td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>ThemeOverlay.MaterialComponents.MaterialCalendar.*</td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>ThemeOverlay.MaterialComponents.Toolbar.*</td>
+</tr>
+</tbody></table>
+<p><img src="https://miro.medium.com/max/1400/1*hMzOWVgy9lPvBwrQlxxsqw.gif" alt="theme"><br>MDC 1.0.0 과 Theme.MaterialComponents.* 테마를 사용한 앱 예제</p>
 <h2 id="라이브러리-의존하기"><a href="#라이브러리-의존하기" class="headerlink" title="라이브러리 의존하기"></a>라이브러리 의존하기</h2><p>안드로이드를 위한 Material 컴포턴트들은 구글 메이븐 저장소를 통해서 이용할 수 있다.</p>
 <h3 id="사용-방법"><a href="#사용-방법" class="headerlink" title="사용 방법"></a>사용 방법</h3><pre><code>1) 어플리케이션의 build.gradle 파일을 열어주세요.
 2) 구글 메이븐 저장소인 google() 을 repositories 섹션에 포함시켜 주세요.</code></pre>
@@ -277,8 +324,12 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  implementation <span class="string">&#x27;com.google.android.material:material:&lt;version&gt;&#x27;</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>라이브러리의 최선 버전을 알기 위해 <a target="_blank" rel="noopener" href="https://maven.google.com/web/index.html#com.google.android.material:material">구글 메이븐 저장소</a> 나 <a target="_blank" rel="noopener" href="https://mvnrepository.com/artifact/com.google.android.material/material">MVN 저장소</a> 를 방문해주세요.</p>
-<h3 id="새로운-Namespace-와-AndroidX"><a href="#새로운-Namespace-와-AndroidX" class="headerlink" title="새로운 Namespace 와 AndroidX"></a>새로운 Namespace 와 AndroidX</h3><p>앱이 현재 기존의 디자인 서포트 라이브러리에 의존하고 있다면 안드로이드 스튜디오에서 제공하는 옵션인 Refactor 를 사용해서 AndroidX</p>
-
+<h3 id="새로운-Namespace-와-AndroidX"><a href="#새로운-Namespace-와-AndroidX" class="headerlink" title="새로운 Namespace 와 AndroidX"></a>새로운 Namespace 와 AndroidX</h3><p>앱이 현재 기존의 디자인 서포트 라이브러리에 의존하고 있다면 안드로이드 스튜디오에서 제공하는 옵션인 Refactor 를 사용해서 AndroidX를 통해 리팩토링 할 수 있습니다. 앱은 의존성과 코드를 새로운 androidx 패키지와 com.google.android.material 라이브러리를 사용할 것 입니다.</p>
+<p>androidx 와 com.google.android.material 패키지로 아직 변경하고 싶지 않다면 com.android.support:design:28.0.0 의존성을 사용하면 됩니다.</p>
+<p>메모: com.android.support 과 com.google.android.material 의존성을 앱에서 동시에 사용할 수 없습니다.</p>
+<h3 id="안드로이드-10을-사용한-앱-컴파일하기"><a href="#안드로이드-10을-사용한-앱-컴파일하기" class="headerlink" title="안드로이드 10을 사용한 앱 컴파일하기"></a>안드로이드 10을 사용한 앱 컴파일하기</h3><p>안드로이드에서 Material Components 사용하기 위해선 Support Libraries 최신 버전이 필요합니다. 안드로이드 10을 사용하기 위해선 안드로이드 스튜디오 3.5 나 더 높은 버전이 필요하며 앱의 compileSdkVersion 을 29로 업데이트 해야 합니다.</p>
+<h3 id="AppCompatActivity를-사용-중인지-확인하기"><a href="#AppCompatActivity를-사용-중인지-확인하기" class="headerlink" title="AppCompatActivity를 사용 중인지 확인하기"></a>AppCompatActivity를 사용 중인지 확인하기</h3><p>AppCompatActivty 를 사용하면 모든 컴포넌트가 정상적으로 작동합니다. AppCompatActivity 로 상속 받지 않으려면 AppCompatDelegate 를 액티비티에 사용하면 됩니다.</p>
+<h3 id="앱-테마를-Material-컴포넌트-테마로-변경하기"><a href="#앱-테마를-Material-컴포넌트-테마로-변경하기" class="headerlink" title="앱 테마를 Material 컴포넌트 테마로 변경하기"></a>앱 테마를 Material 컴포넌트 테마로 변경하기</h3>
         </div>
 
         
@@ -328,6 +379,8 @@
             </div>
         </section>
         <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/10/05/GMP-Google-Maps-Platform/">GMP(Google Maps Platform)</a>
             
             
             <a class="next" rel="next" href="/2020/10/03/Android-BackGround-and-Foreground-Service/">Android BackGround and Foreground Service</a>

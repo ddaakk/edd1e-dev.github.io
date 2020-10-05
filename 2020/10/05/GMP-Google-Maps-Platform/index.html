@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Kang Sang Woo">
+
+
+
+
+
+<title>GMP(Google Maps Platform) | In-Genieur</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">In-Genieur</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">In-Genieur</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">GMP(Google Maps Platform)</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Kang Sang Woo</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">October 5, 2020&nbsp;&nbsp;11:19:00</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h2><h3 id="개요-1"><a href="#개요-1" class="headerlink" title="개요"></a>개요</h3><p>Maps SDK for Android를 사용하면 Google 지도 데이터에 기반한 지도를 애플리케이션에 추가할 수 있습니다. API는 Google 지도 서버 액세스, 데이터 다운로드, 지도 표시, 지도 동작에 대한 응답을 자동으로 처리합니다. 또한 API 호출을 사용하여 기본 지도에 아이콘, 다각형, 오버레이를 추가하고 특정 지도 영역의 사용자 뷰를 변경할 수도 있습니다. 이 객체는 지도 위치에 관한 추가 정보를 제공하며 사용자는 이 객체를 통해 지도와 상호작용할 수 있습니다. API를 사용하면 지도에 다음과 같은 그래픽을 추가할 수 있습니다.</p>
+<ul>
+<li>지도의 특정 위치에 고정된 아이콘</li>
+<li>선분의 집합(다중선)</li>
+<li>닫혀 있는 선분(다각형)</li>
+<li>지도의 특정 위치에 고정된 비트맵 그래픽(지면 오버레이)</li>
+<li>기본 지도 타일 상단에 표시되는 이미지 집합 (타일 오버레이)</li>
+</ul>
+<h3 id="대상"><a href="#대상" class="headerlink" title="대상"></a>대상</h3><p>이 문서는 Android 개발 및 객체 지향 프로그래밍 개념에 익숙한 개발자를 위해 작성되었습니다. 개발자는 사용자의 관점에서 Google 지도에도 익숙해야 합니다.</p>
+<p>이 문서는 Maps SDK for Android를 사용하여 신속하게 애플리케이션을 연구하고 개발할 수 있도록 작성되었습니다. 클래스 및 메서드의 자세한 내용에 관한 참조 문서를 참고할 수도 있습니다.</p>
+<h3 id="접근성"><a href="#접근성" class="headerlink" title="접근성"></a>접근성</h3><p>Maps SDK for Android에서는 접근성 지원 기능을 기본으로 지원합니다. 이 섹션에는 API를 사용하는 모든 애플리케이션에서 자동으로 사용 설정되는 접근성 기능을 상위 수준에서 요약한 내용이 포함되어 있습니다.</p>
+<p>사용자가 휴대기기에서 음성 안내 지원 접근성 기능을 사용 설정한 경우 화면을 한 번 스와이프할 때마다 한 UI 요소에서 다른 UI 요소로 초점이 이동합니다. (화면을 한 번 스와이프하는 대신 인터페이스 위에서 손가락으로 드래그하여 UI 요소를 탐색할 수도 있습니다.) UI 요소에 초점이 맞춰지면 음성 안내 지원 기능이 요소의 이름을 읽습니다. 사용자가 화면의 아무 곳이나 두 번 탭하면 초점이 맞춰진 작업이 실행됩니다.</p>
+<p>Android 앱의 접근성 향상에 대한 안내는 <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/ui/accessibility/">Android 접근성 문서</a>를 참고하세요. 특히 지도를 설명하는 공지사항을 추가하는 것이 좋습니다. 공지사항의 텍스트를 지정하려면 뷰에서 setContentDescription()을 호출하세요.</p>
+<h2 id="API-키-가져오기"><a href="#API-키-가져오기" class="headerlink" title="API 키 가져오기"></a>API 키 가져오기</h2><p>Maps SDK for Android를 사용하려면 API 키가 있어야 합니다. API 키는 사용 및 결제 목적으로 프로젝트와 관련된 요청을 인증하는 데 사용되는 고유 식별자입니다.</p>
+<h3 id="API-키-가져오기-1"><a href="#API-키-가져오기-1" class="headerlink" title="API 키 가져오기"></a>API 키 가져오기</h3><p>프로젝트에 연결된 API 키가 하나 이상 있어야 합니다.</p>
+<p>API 키를 가져오는 방법은 다음과 같습니다.</p>
+<pre><code>1. [Google Cloud Platform Console](https://cloud.google.com/console/google/maps-apis/overview) 로 이동합니다.
+2. 프로젝트 드롭다운을 클릭하고 API 키를 추가할 프로젝트를 선택하거나 만듭니다.
+3. 메뉴 버튼 을 클릭하고 API 및 서비스 &gt; 사용자 인증 정보를 선택합니다.
+4. 사용자 인증 정보 페이지에서 사용자 인증 정보 만들기 &gt; API 키를 클릭합니다. API 키 생성 완료 대화상자에 새로 만든 API 키가 표시됩니다.    
+5. 닫기를 클릭합니다. 새 API 키는 사용자 인증 정보 페이지의 API 키 아래 나열됩니다. (프로덕션에 사용하기 전에 [API 키를 제한](https://developers.google.com/maps/documentation/android-sdk/get-api-key#restrict_key)하세요.)</code></pre>
+<h3 id="앱에-API-키-추가"><a href="#앱에-API-키-추가" class="headerlink" title="앱에 API 키 추가"></a>앱에 API 키 추가</h3><p>아래 단계에 따라 AndroidManifest.xml 파일에 포함된 애플리케이션의 매니페스트에 API 키를 추가합니다.</p>
+<ol>
+<li>AndroidManifest.xml에서 </application> 태그를 닫기 직전에 다음 요소를 삽입하여 <application> 요소의 하위 요소로 추가합니다.</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta-data</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:name</span>=<span class="string">&quot;com.google.android.geo.API_KEY&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:value</span>=<span class="string">&quot;YOUR_API_KEY&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>value 속성에서 YOUR_API_KEY를 API 키(암호화된 문자열)로 대체합니다. 이 요소는 com.google.android.geo.API_KEY 키를 API 키 값으로 설정합니다.</p>
+<ol start="2">
+<li>AndroidManifest.xml을 저장하고 애플리케이션을 다시 빌드합니다.</li>
+</ol>
+<h2 id="시작하기"><a href="#시작하기" class="headerlink" title="시작하기"></a>시작하기</h2><p>먼저 위의 과정을 통해 API Key 를 설정해야 합니다.</p>
+<h3 id="XML-레이아웃-파일"><a href="#XML-레이아웃-파일" class="headerlink" title="XML 레이아웃 파일"></a>XML 레이아웃 파일</h3><p>res/layout/activity_maps.xml 에 아래 데이터를 입력해주세요.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">fragment</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:tools</span>=<span class="string">&quot;http://schemas.android.com/tools&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:id</span>=<span class="string">&quot;@+id/map&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">tools:context</span>=<span class="string">&quot;.MapsActivity&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:name</span>=<span class="string">&quot;com.google.android.gms.maps.SupportMapFragment&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Maps-액티비티"><a href="#Maps-액티비티" class="headerlink" title="Maps 액티비티"></a>Maps 액티비티</h3><p>MapsActivity.java 를 생성한 후 아래 내용을 사용하세요.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Copyright 2020 Google LLC</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></span><br><span class="line"><span class="comment">// you may not use this file except in compliance with the License.</span></span><br><span class="line"><span class="comment">// You may obtain a copy of the License at</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//      http://www.apache.org/licenses/LICENSE-2.0</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Unless required by applicable law or agreed to in writing, software</span></span><br><span class="line"><span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></span><br><span class="line"><span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></span><br><span class="line"><span class="comment">// See the License for the specific language governing permissions and</span></span><br><span class="line"><span class="comment">// limitations under the License.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.google.maps.example;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> androidx.appcompat.app.AppCompatActivity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.google.android.gms.maps.CameraUpdateFactory;</span><br><span class="line"><span class="keyword">import</span> com.google.android.gms.maps.GoogleMap;</span><br><span class="line"><span class="keyword">import</span> com.google.android.gms.maps.OnMapReadyCallback;</span><br><span class="line"><span class="keyword">import</span> com.google.android.gms.maps.SupportMapFragment;</span><br><span class="line"><span class="keyword">import</span> com.google.android.gms.maps.model.LatLng;</span><br><span class="line"><span class="keyword">import</span> com.google.android.gms.maps.model.MarkerOptions;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MapsActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> <span class="keyword">implements</span> <span class="title">OnMapReadyCallback</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> GoogleMap mMap;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_maps);</span><br><span class="line">        <span class="comment">// Obtain the SupportMapFragment and get notified when the map is ready to be used.</span></span><br><span class="line">        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()</span><br><span class="line">                .findFragmentById(R.id.map);</span><br><span class="line">        mapFragment.getMapAsync(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Manipulates the map once available.</span></span><br><span class="line"><span class="comment">     * This callback is triggered when the map is ready to be used.</span></span><br><span class="line"><span class="comment">     * This is where we can add markers or lines, add listeners or move the camera. In this case,</span></span><br><span class="line"><span class="comment">     * we just add a marker near Sydney, Australia.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * If Google Play services is not installed on the device, the user will be prompted to install</span></span><br><span class="line"><span class="comment">     * it inside the SupportMapFragment. This method will only be triggered once the user has</span></span><br><span class="line"><span class="comment">     * installed Google Play services and returned to the app.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onMapReady</span><span class="params">(GoogleMap googleMap)</span> </span>&#123;</span><br><span class="line">        mMap = googleMap;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Add a marker in Sydney and move the camera</span></span><br><span class="line">        LatLng sydney = <span class="keyword">new</span> LatLng(-<span class="number">34</span>, <span class="number">151</span>);</span><br><span class="line">        mMap.addMarker(<span class="keyword">new</span> MarkerOptions()</span><br><span class="line">                .position(sydney)</span><br><span class="line">                .title(<span class="string">&quot;Marker in Sydney&quot;</span>));</span><br><span class="line">        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="실내-지도-이벤트"><a href="#실내-지도-이벤트" class="headerlink" title="실내 지도 이벤트"></a>실내 지도 이벤트</h2><p>이벤트를 사용하여 실내 지도를 찾고 실내 지도의 활성 층을 맞춤설정할 수 있습니다. 새 건물에 초점이 맞춰지거나 건물에서 새 층이 활성화될 때 호출되는 리스너를 설정하려면 OnIndoorStateChangeListener 인터페이스를 사용하세요.</p>
+<p>GoogleMap.getFocusedBuilding()을 호출하여 현재 초점이 맞춰져 있는 건물을 표시합니다. 특정 위도/경도에 지도의 중심을 맞추면 일반적으로 해당 위도/경도의 건물이 표시되지만 반드시 그런 것은 아닙니다.</p>
+<p>그런 다음 IndoorBuilding.getActiveLevelIndex()를 호출하여 현재 활성 층을 찾을 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">IndoorBuilding building = mMap.getFocusedBuilding();</span><br><span class="line"><span class="keyword">if</span> (building == <span class="keyword">null</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> building.getLevels().get(building.getActiveLevelIndex());</span><br></pre></td></tr></table></figure>
+
+<p>이 기능은 아이콘, 지면 오버레이, 타일 오버레이, 다각형, 다중선, 기타 도형 등 활성 층의 맞춤 아이콘을 표시하려는 경우 유용합니다.</p>
+<p>참고: 거리 수준으로 돌아가려면 IndoorBuilding.getDefaultLevelIndex()를 통해 기본 층을 가져와 IndoorLevel.activate()를 통해 활성 층으로 설정하세요.</p>
+<h2 id="위치-데이터-가져오기"><a href="#위치-데이터-가져오기" class="headerlink" title="위치 데이터 가져오기"></a>위치 데이터 가져오기</h2><p>모바일 애플리케이션의 고유한 기능 중 하나는 위치 인식입니다. 모바일 사용자는 어디서나 기기를 휴대하므로 앱에 위치 인식 기능을 추가하면 사용자에게 더욱 상황에 맞는 경험을 제공할 수 있습니다.</p>
+<h3 id="코드-샘플"><a href="#코드-샘플" class="headerlink" title="코드 샘플"></a>코드 샘플</h3><p>GitHub의 <a target="_blank" rel="noopener" href="https://github.com/googlemaps/android-samples/blob/master/ApiDemos">ApiDemos 저장소</a>에는 지도에서 위치의 사용 방법을 보여주는 샘플이 포함되어 있습니다.</p>
+<ul>
+<li>MyLocationDemoActivity: 런타임 권한 등 내 위치 레이어 사용</li>
+<li>LocationSourceDemoActivity: 맞춤 LocationSource 사용</li>
+<li>CurrentPlaceDetailsOnMap: Android 기기의 현재 위치 찾기 및 해당 위치에 있는 장소(비즈니스 또는 기타 관심 장소)의 세부정보 표시. 지도에 현재 장소의 세부정보를 표시하는 방법에 관한 가이드를 참고하세요.</li>
+</ul>
+<h3 id="위치-데이터-사용하기"><a href="#위치-데이터-사용하기" class="headerlink" title="위치 데이터 사용하기"></a>위치 데이터 사용하기</h3><p>Android 기기에서 사용할 수 있는 위치 데이터에는 (여러 기술 조합을 사용하여 찾아낸) 기기의 정확한 현재 위치, 이동 방향과 수단, 기기가 사전 정의된 지리적 경계나 지오펜싱 위로 움직였는지 여부가 포함됩니다. 애플리케이션의 필요에 따라 여러 가지 위치 데이터 사용 방법 중에서 선택할 수 있습니다.</p>
+<ul>
+<li>내 위치 레이어를 사용하면 간단한 방법으로 기기의 위치를 지도에 표시할 수 있지만 데이터는 제공되지 않습니다.</li>
+<li>위치 데이터에 대한 모든 프로그래매틱 요청에 Google Play 서비스 Location API를 사용하는 것이 좋습니다.</li>
+<li>LocationSource 인터페이스를 사용하면 맞춤 위치 제공업체를 선택할 수 있습니다.</li>
+</ul>
+<h3 id="위치-정보-액세스-권한"><a href="#위치-정보-액세스-권한" class="headerlink" title="위치 정보 액세스 권한"></a>위치 정보 액세스 권한</h3><p>앱에서 사용자의 위치에 액세스해야 하는 경우 앱에 관련 Android 위치 정보 액세스 권한을 추가하여 권한을 요청해야 합니다.</p>
+<p>Android에서는 두 가지(ACCESS_COARSE_LOCATION 및 ACCESS_FINE_LOCATION) 위치 정보 액세스 권한을 제공합니다. 선택한 권한에 따라 API에서 반환하는 위치의 정확도가 결정됩니다. 필요한 정확도 수준에 따라 Android 위치 정보 액세스 권한 중 하나만 요청하면 됩니다.</p>
+<ul>
+<li><p>android.permission.ACCESS_COARSE_LOCATION - API에서 WiFi 또는 모바일 데이터(또는 둘 다)를 사용하여 기기의 위치를 결정할 수 있습니다. API에서는 정확도가 도시 블록 1개 정도의 오차 수준으로 위치를 반환합니다.</p>
+</li>
+<li><p>android.permission.ACCESS_FINE_LOCATION - API에서 위성 위치 확인 시스템(GPS), WiFi 및 모바일 데이터 등 이용 가능한 위치 제공자를 사용하여 최대한 정확하게 위치를 결정할 수 있습니다.</p>
+</li>
+</ul>
+<h3 id="앱-매니페스트에-권한-추가"><a href="#앱-매니페스트에-권한-추가" class="headerlink" title="앱 매니페스트에 권한 추가"></a>앱 매니페스트에 권한 추가</h3><p>Android 매니페스트에 다음 권한 중 하나를 <manifest> 요소의 하위 요소로 추가합니다. 대략적 위치 정보 액세스 권한:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">package</span>=<span class="string">&quot;com.example.myapp&quot;</span> &gt;</span></span><br><span class="line">  ...</span><br><span class="line">  <span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.ACCESS_COARSE_LOCATION&quot;</span>/&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>상세한 위치 정보 액세스 권한:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">package</span>=<span class="string">&quot;com.example.myapp&quot;</span> &gt;</span></span><br><span class="line">  ...</span><br><span class="line">  <span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.ACCESS_FINE_LOCATION&quot;</span>/&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="런타임-권한-요청"><a href="#런타임-권한-요청" class="headerlink" title="런타임 권한 요청"></a>런타임 권한 요청</h3><p>Android 6.0(Marshmallow)에서는 사용자의 앱 설치 및 업그레이드 과정을 간소화한 새로운 권한 처리 모델을 소개합니다. 앱이 API 수준 23 이상을 타겟팅하는 경우 새 권한 모델을 사용할 수 있습니다.</p>
+<p>앱이 새 권한 모델을 지원하고 기기에서 Android 6.0(Marshmallow) 이상이 실행되는 경우 사용자가 앱을 설치하거나 업그레이드할 때 권한을 부여할 필요가 없습니다. 앱에서 런타임에 필요한 권한이 있는지 확인하고 권한이 없는 경우 권한을 요청해야 합니다. 시스템은 사용자에게 권한을 요청하는 대화상자를 표시합니다.</p>
+<p>최고의 사용자 환경을 제공하려면 상황에 따라 권한을 요청하는 것이 중요합니다. 위치가 앱의 작동에 필수적인 경우 앱 시작 시 위치 정보 액세스 권한을 요청해야 합니다. 이 작업을 처리하는 좋은 방법은 사용자에게 권한이 필요한 이유를 설명하는 시작 페이지 화면 또는 마법사를 사용하는 것입니다.</p>
+<p>앱에서 일부 기능에만 권한이 필요한 경우 앱에서 권한이 필요한 작업을 실행할 때 위치 정보 액세스 권한을 요청해야 합니다.</p>
+<p>사용자가 권한을 부여하지 않은 경우 앱에서 적절히 처리해야 합니다. 예를 들어 특정 기능에 권한이 필요한 경우 앱에서 해당 기능을 사용 중지할 수 있습니다. 앱이 제대로 작동하는 데 권한이 필수적인 경우 앱에서 모든 기능을 사용 중지하고 사용자에게 권한을 부여해야 한다고 알릴 수 있습니다.</p>
+<p>다음 코드 샘플에서는 내 위치 레이어를 사용 설정하기 전에 지원 라이브러리를 사용하여 권한을 확인합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (ContextCompat.checkSelfPermission(<span class="keyword">this</span>, Manifest.permission.ACCESS_FINE_LOCATION)</span><br><span class="line">        == PackageManager.PERMISSION_GRANTED) &#123;</span><br><span class="line">    <span class="keyword">if</span> (mMap != <span class="keyword">null</span>) &#123;</span><br><span class="line">        mMap.setMyLocationEnabled(<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// Permission to access the location is missing. Show rationale and request permission</span></span><br><span class="line">    PermissionUtils.requestPermission(<span class="keyword">this</span>, LOCATION_PERMISSION_REQUEST_CODE,</span><br><span class="line">        Manifest.permission.ACCESS_FINE_LOCATION, <span class="keyword">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>다음 샘플에서는 지원 라이브러리에서 ActivityCompat.OnRequestPermissionsResultCallback을 구현하여 권한 요청의 결과를 처리합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onRequestPermissionsResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="meta">@NonNull</span> String[] permissions, <span class="meta">@NonNull</span> <span class="keyword">int</span>[] grantResults)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (requestCode != LOCATION_PERMISSION_REQUEST_CODE) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (PermissionUtils.isPermissionGranted(permissions, grantResults, Manifest.permission.ACCESS_FINE_LOCATION)) &#123;</span><br><span class="line">        <span class="comment">// Enable the my location layer if the permission has been granted.</span></span><br><span class="line">        enableMyLocation();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// Permission was denied. Display an error message</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>추가적으로 확인할 것<br><a target="_blank" rel="noopener" href="https://developers.google.com/places/android-sdk/overview">Places SDK for Android</a></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Kang Sang Woo</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://in-genieur.github.io/2020/10/05/GMP-Google-Maps-Platform/">http://in-genieur.github.io/2020/10/05/GMP-Google-Maps-Platform/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2020 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>learn everything to <strong>GROW UP</strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2020/10/04/Getting-started-with-Material-Components-for-Android/">Getting started with Material Components for Android</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Kang Sang Woo | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
