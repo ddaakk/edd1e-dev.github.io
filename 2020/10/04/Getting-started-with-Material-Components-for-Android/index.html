@@ -329,7 +329,38 @@
 <p>메모: com.android.support 과 com.google.android.material 의존성을 앱에서 동시에 사용할 수 없습니다.</p>
 <h3 id="안드로이드-10을-사용한-앱-컴파일하기"><a href="#안드로이드-10을-사용한-앱-컴파일하기" class="headerlink" title="안드로이드 10을 사용한 앱 컴파일하기"></a>안드로이드 10을 사용한 앱 컴파일하기</h3><p>안드로이드에서 Material Components 사용하기 위해선 Support Libraries 최신 버전이 필요합니다. 안드로이드 10을 사용하기 위해선 안드로이드 스튜디오 3.5 나 더 높은 버전이 필요하며 앱의 compileSdkVersion 을 29로 업데이트 해야 합니다.</p>
 <h3 id="AppCompatActivity를-사용-중인지-확인하기"><a href="#AppCompatActivity를-사용-중인지-확인하기" class="headerlink" title="AppCompatActivity를 사용 중인지 확인하기"></a>AppCompatActivity를 사용 중인지 확인하기</h3><p>AppCompatActivty 를 사용하면 모든 컴포넌트가 정상적으로 작동합니다. AppCompatActivity 로 상속 받지 않으려면 AppCompatDelegate 를 액티비티에 사용하면 됩니다.</p>
-<h3 id="앱-테마를-Material-컴포넌트-테마로-변경하기"><a href="#앱-테마를-Material-컴포넌트-테마로-변경하기" class="headerlink" title="앱 테마를 Material 컴포넌트 테마로 변경하기"></a>앱 테마를 Material 컴포넌트 테마로 변경하기</h3>
+<h3 id="앱-테마를-Material-컴포넌트-테마로-변경하기"><a href="#앱-테마를-Material-컴포넌트-테마로-변경하기" class="headerlink" title="앱 테마를 Material 컴포넌트 테마로 변경하기"></a>앱 테마를 Material 컴포넌트 테마로 변경하기</h3><p>앱 전체의 테마를 변경하는 것이 추천하는 방법이지만 기존 레이아웃의 컴포넌트 모양과 동작이 변경될 수 있으니 충분한 테스트가 필요합니다.</p>
+<p>참고: 테마를 변경할 수 없는 경우 다음 중 하나를 수행할 수 있습니다.</p>
+<ul>
+<li>Material Components Bridge 테마 중 하나에서 상속 합니다.</li>
+<li>AppCompat 테마에서 상속 받은 걸 유지하면서 테마에 몇 가지 새 테마 속성을 추가하면 됩니다.</li>
+</ul>
+<h3 id="Material-컴포넌트-테마"><a href="#Material-컴포넌트-테마" class="headerlink" title="Material 컴포넌트 테마"></a>Material 컴포넌트 테마</h3><ul>
+<li>Theme.MaterialComponents</li>
+<li>Theme.MaterialComponents.NoActionBar</li>
+<li>Theme.MaterialComponents.Light</li>
+<li>Theme.MaterialComponents.Light.NoActionBar</li>
+<li>Theme.MaterialComponents.Light.DarkActionBar</li>
+<li>Theme.MaterialComponents.DayNight</li>
+<li>Theme.MaterialComponents.DayNight.NoActionBar</li>
+<li>Theme.MaterialComponents.DayNight.DarkActionBar</li>
+</ul>
+<p>다음 중 하나를 상속 받도록 앱을 변경해줘야 합니다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">&quot;Theme.MyApp&quot;</span> <span class="attr">parent</span>=<span class="string">&quot;Theme.MaterialComponents.DayNight&quot;</span>&gt;</span></span><br><span class="line"><span class="xml">    <span class="comment">&lt;!-- ... --&gt;</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Bridge-테마"><a href="#Bridge-테마" class="headerlink" title="Bridge 테마"></a>Bridge 테마</h3><p>테마를 MaterialComponent 로부터 상속 받도록 바꿀 수 없다면 Material Components Bridge 테마로부터 상속 받을 수 있습니다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">&quot;Theme.MyApp&quot;</span> <span class="attr">parent</span>=<span class="string">&quot;Theme.MaterialComponents.Light.Bridge&quot;</span>&gt;</span></span><br><span class="line"><span class="xml">    <span class="comment">&lt;!-- ... --&gt;</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Theme.MaterialComponents 와 Theme.MaterialComponents.Light 모두 .Bridge 테마를 가지고 있습니다.</p>
+<ul>
+<li>Theme.MaterialComponents.Bridge</li>
+<li>Theme.MaterialComponents.Light.Bridge</li>
+<li>Theme.MaterialComponents.NoActionBar.Bridge</li>
+<li>Theme.MaterialComponents.Light.NoActionBar.Bridge</li>
+<li>Theme.MaterialComponents.Light.DarkActionBar.Bridge</li>
+</ul>
+<p>Bridge 테마를 사용하면 앱 테마를 변경하지 않고도 Material 디자인 Components를 사용할 수 있습니다.</p>
+
         </div>
 
         
